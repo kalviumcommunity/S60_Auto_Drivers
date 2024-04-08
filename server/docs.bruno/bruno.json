@@ -1,0 +1,9 @@
+{
+    "version": "1",
+    "name": "S60_Auto_Drivers",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ]
+}
