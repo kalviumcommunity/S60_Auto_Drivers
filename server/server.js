@@ -23,7 +23,10 @@ mongoose.connect("mongodb+srv://vinnugollakoti:123@cluster0.cwivpr4.mongodb.net/
 .catch((err) => {
     console.error("Error connecting to MongoDB:", err);
 });
-
+app.get("/get", (req, res) => {
+    res.send("service is working")
+    console.log("everthing is upto data!!")
+})
 app.use((err, res) => {
     console.error(err.stack);
     res.status(500).send("Something went wrong!");
