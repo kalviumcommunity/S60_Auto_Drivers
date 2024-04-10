@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const route = require("./routes");
 
 const app = express();
 const port = 3001;
@@ -12,6 +13,8 @@ app.get("/ping", (req, res) => {
     res.send("pong");
 });
 
+app.use("/",route)
+
 // MongoDB Connection
 mongoose.connect("mongodb+srv://vinnugollakoti:123@cluster0.cwivpr4.mongodb.net/mydatabase?retryWrites=true&w=majority")
 .then(() => {
@@ -22,12 +25,4 @@ mongoose.connect("mongodb+srv://vinnugollakoti:123@cluster0.cwivpr4.mongodb.net/
 })
 .catch((err) => {
     console.error("Error connecting to MongoDB:", err);
-});
-app.get("/get", (req, res) => {
-    res.send("service is working")
-    console.log("everthing is upto data!!")
-})
-app.use((err, res) => {
-    console.error(err.stack);
-    res.status(500).send("Something went wrong!");
 });
