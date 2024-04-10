@@ -1,10 +1,18 @@
+import dummydata from './dummydata.json'
 const Home = () => {
   return (
-    <div>
-        <center>
-            <h2>Welcome to the Auto drivers convo page</h2>
-            <h3>here you can share or read the funniest conversions with the auto drivers</h3>
-        </center>
+    <div className="container">
+      <center><h2 className='heading'>Enjoy our content</h2></center>
+          {dummydata.map((data) => {
+            return (
+              <div className='container' key={data.id}>
+                <div className='container1'>
+                <h3>Type of driver : {data.type}</h3>
+                <h4>Type of conversation with them :</h4>
+                <p>{data.about}</p></div>
+              </div>
+            )
+          })}
     </div>
   )
 }
