@@ -3,6 +3,26 @@ html {
 }
 body {
     background-color: rgb(130, 246, 255);
+    margin: 0px;
+    padding: 0px;
+}
+nav {
+    background-color: rgb(254, 254, 109);
+    color: black;
+    padding: 0.2%;
+}
+.lol{
+    display: flex;
+    justify-content: center;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+.navdiv {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
 }
 .container1 {
     width: 70%;
@@ -17,4 +37,45 @@ body {
 }
 .heading {
     margin-bottom: 4%;
+}
+.secondbody {
+    height: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+}
+.formbox {
+    background-color: rgb(254, 254, 109);
+    padding: 2%;
+    width: fit-content;
+    margin-top: 10%;
+}
+.typediv, .aboutdiv {
+    margin-bottom: 4%;
+}
+label {
+    margin-bottom: 0.3%;
+}
+input {
+    width: 300px;
+    padding: 2%;
+}
+textarea {
+    width: 310px;
+}
+.btnsdiv {
+    display: flex;
+    justify-content: space-between;
+}
+button {
+    background-color: rgb(130, 246, 255);
+    color: black;
+    font-size: medium;
+    border-radius: 13px;
+    
+}
+button:hover {
+    background-color: rgb(254, 254, 109);
+    color: rgb(12, 79, 99);
 }
