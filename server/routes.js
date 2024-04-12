@@ -1,7 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
-
+const Data = require("./model.js")
 const app = express()
 app.use(express.json())
 
@@ -19,6 +19,16 @@ app.put("/update", (req, res) => {
 
 app.delete("/delete", (req, res) => {
     return res.json({message : "your content is deleted"})
+})
+
+app.get("/getdata", async(req, res) => {
+    try {
+        const data = await Data.find()
+        res.json(data)
+    } catch (err) {
+        console.error("Error in fetching data:", err)
+        res.status(500).json({error: "AN error occured"})
+    }
 })
 
 module.exports = app;
