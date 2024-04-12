@@ -30,5 +30,18 @@ app.get("/getdata", async(req, res) => {
         res.status(500).json({error: "AN error occured"})
     }
 })
+app.post("/data", async (req,res) => {
+    try {
+        const {type, about} = req.body
+        const newData = new Data({
+            type,
+            about
+        })
+        await newData.save()
+        res.json({message : "Data saved successfully!"})
+    }catch(err) {
+        console.error("Error in saving data:", err)
+    }
+})
 
 module.exports = app;

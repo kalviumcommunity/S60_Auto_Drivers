@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 const Home = () => {
@@ -17,6 +18,14 @@ const Home = () => {
 
   return (
     <div className="container">
+      <nav>
+        <div className='lol'>
+        <div className='navdiv'>
+          <div><h4>Logo here!</h4></div>
+          <Link to="/form" className='h4'>
+          <div><h4>Create a type</h4></div></Link>
+        </div></div>
+      </nav>
       <center><h2 className='heading'>Enjoy our content</h2></center>
       {Array.isArray(data) && data.length > 0 ? (
         data.map((item) => (
