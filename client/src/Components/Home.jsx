@@ -2,6 +2,21 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
+const Logout = () => {
+  const handleLogout = async () => {
+    try {
+      await axios.get("http://localhost:3001/logout");
+      window.location.href = "/login";
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
+
+  return (
+    <h4 className='option' onClick={handleLogout}>Logout</h4>
+  );
+};
+
 const Home = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
@@ -33,9 +48,26 @@ const Home = () => {
         <div className='lol'>
           <div className='navdiv'>
             <div><h4>Logo here!</h4></div>
-            <Link to="/form" className='h4'>
-              <div><h4>Create a type</h4></div>
-            </Link>
+              <div className='nav-options'>
+                <div>
+                  <Link to="/form" className='h4'>
+                    <h4 className='option'>Create a type</h4>
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/register">
+                    <h4 className='option'>Register</h4>
+                  </Link>
+                </div>
+                <div>
+                  <Link to="login">
+                    <h4 className='option'>Login</h4>
+                  </Link>
+                </div>
+                <div>
+                  <Logout />
+                </div>
+              </div>
           </div>
         </div>
       </nav>
