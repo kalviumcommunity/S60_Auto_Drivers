@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const  User  = require("./userSchema.js");
 const Data = require("./model.js");
 const joi = require("joi");
+const jwt = require("jsonwebtoken")
 const cookieParser = require("cookie-parser")
 const app = express();
 app.use(express.json());
@@ -14,6 +15,8 @@ const dataSchema = joi.object({
   type: joi.string().required(),
   about: joi.string().required()
 });
+
+const JWT_SECRET = "your_secret_key";
 
 app.get("/getdata", async (req, res) => {
   try {
@@ -119,6 +122,8 @@ app.post("/login", async (req, res) => {
     if (!validPasswords) {
       return res.status(400).json({ message: "Incorrect password" });
     }
+    const token = jwt.sign({ username: user.username }, JWT_SECRET);
+    res.cookie("token", token, { httpOnly: true });
     res.cookie("authToken", "uniqueTokenValue", { httpOnly: true, maxAge: 86400000 });
     res.cookie("username", username, { httpOnly: true });
     return res.json({ status: true, message: "You are successfully logged in" });
@@ -127,9 +132,27 @@ app.post("/login", async (req, res) => {
     return res.status(500).json({ error: "An error occurred" });
   }
 });
+
+function authenticateToken(req, res, next) {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ message: "Invalid token" });
+    }
+    req.user = user;
+    next();
+  });
+}
 // this is logout route
 app.get("/logout", (req, res) => {
   res.clearCookie("username");
   return res.status(200).json({ message: "Logout successful" });
+});
+app.get("/protected", authenticateToken, (req, res) => {
+  res.json({ message: "Protected endpoint accessed successfully" });
 });
 module.exports = app;
