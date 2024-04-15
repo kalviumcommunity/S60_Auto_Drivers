@@ -41,18 +41,26 @@ a {
 .secondbody {
     height: 100%;
   margin: 0;
+  width: 100%;
   display: flex;
   align-items: center; 
   justify-content: center;
 }
+
 .formbox {
     background-color: rgb(254, 254, 109);
     padding: 2%;
     width: fit-content;
     margin-top: 10%;
+    border-radius: 20px;
 }
 .typediv, .aboutdiv {
-    margin-bottom: 4%;
+    width: 95%;
+    margin-bottom: 2%;
+}
+.inputdiv {
+    width: 95%;
+    margin-bottom: 2%;
 }
 label {
     margin-bottom: 0.3%;
@@ -68,6 +76,10 @@ textarea {
     display: flex;
     justify-content: space-between;
 }
+.btnsdiv1 {
+    display: flex;
+    justify-content: space-between;
+}
 button {
     background-color: rgb(130, 246, 255);
     color: black;
@@ -80,3 +92,54 @@ button:hover {
     background-color: rgb(254, 254, 109);
     color: rgb(12, 79, 99);
 }
+
+.secondbody1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top: -4%;
+  }
+  
+  .formbox1 {
+    background-color: rgb(254, 254, 109);
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    border-radius: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+  }
+  
+  .inputdiv {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .btnsdiv1 {
+    margin-top: 20px;
+  }
+  .nav-options {
+    width: 35%;
+    display: flex;
+    justify-content: space-between;
+  }

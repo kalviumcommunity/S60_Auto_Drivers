@@ -22,7 +22,6 @@ mongoose.connect("mongodb+srv://vinnugollakoti:123@cluster0.cwivpr4.mongodb.net/
 
         console.log(`Server is running on port ${port}`);
     });
-    
 })
 .catch((err) => {
     console.error("Error connecting to MongoDB:", err);

@@ -20,6 +20,7 @@ const Form = () => {
             console.log(err)
         })
         navigate('/')
+        window.location.reload();
     }
   return (
     <div className="secondbody">
