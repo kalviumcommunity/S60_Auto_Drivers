@@ -1,5 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+* {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
 html {
     width: 100%;
+    height: 100%;
 }
 body {
     background-color: rgb(130, 246, 255);
@@ -22,7 +30,7 @@ a {
 .navdiv {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 85%;
 }
 .container1 {
     width: 70%;
@@ -37,6 +45,7 @@ a {
 }
 .heading {
     margin-bottom: 4%;
+    font-weight: 600;
 }
 .secondbody {
     height: 100%;
@@ -139,7 +148,80 @@ button:hover {
     margin-top: 20px;
   }
   .nav-options {
-    width: 35%;
+    width: 70%;
     display: flex;
     justify-content: space-between;
+  }
+  .option-div {
+    position: relative;
+    margin-left: 10%;
+    font-size: small;
+    font-weight: 500;
+  }
+  .logo {
+    width: 20%;
+    margin-top: 1.3%;
+  }
+  h3, h4, h5 {
+    font-weight: 500;
+  }
+  .authors-box-main {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(254, 254, 109);
+  }
+  .authors-box {
+    width: 100%;
+    background-color: rgb(254, 254, 109);
+    /* margin-top: 5%; */
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .authors-box1 {
+    /* padding-left: 30%; */
+    display: flex;
+  flex-direction: column; /* Arrange items vertically */
+  align-items: center;
+  white-space: nowrap; 
+  width: 50%;
+  }
+  .author {
+    /* width: 60%; */
+    margin: 0 10px; /* Add margin for spacing between names */
+  /* text-overflow: ellipsis; */
+    /* margin-top: ; */
+    border: solid black 2px;
+    border-radius: 15px;
+    width: 100%;
+    margin-bottom: 7%;
+    margin-top: 4%;
+  }
+  .author-name {
+    /* padding: 1%; */
+    padding-left: 3%;
+    margin-right: 3%;
+  }
+  .user-about {
+    background-color: rgb(254, 254, 109);
+    margin-left: 2%;
+    height: fit-content;
+    padding: 2%;
+    width: 50%;
+    margin-top: 16%;
+    border-radius: 15px;
+    position: fixed;
+  }
+  .heading-author {
+    font-weight: 600;
+    position: absolute;
+    margin-left: 26%;
+  }
+  .filteroption {
+    position: absolute;
+    margin-left: 1%;
+  }
+  .body {
+    background-color:rgb(254, 254, 109) ;
+    height: 900px;
   }
