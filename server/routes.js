@@ -13,10 +13,42 @@ app.use(cors());
 
 const dataSchema = joi.object({
   type: joi.string().required(),
-  about: joi.string().required()
+  about: joi.string().required(),
 });
 
 const JWT_SECRET = "your_secret_key";
+
+// Middleware to authenticate JWT token
+function authenticateToken(req, res, next) {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ message: "Invalid token" });
+    }
+    req.user = user;
+    next();
+  });
+}
+
+// GET route to fetch all data associated with a specific user
+app.get("/userdata/:username", async (req, res) => {
+  try {
+    const username = req.params.username;
+
+    // Fetch all data associated with the provided username
+    const userData = await Data.find({ username });
+
+    // Return the data as JSON response
+    res.json(userData);
+  } catch (err) {
+    console.error("Error in fetching user data:", err);
+    res.status(500).json({ error: "An error occurred" });
+  }
+});
 
 app.get("/getdata", async (req, res) => {
   try {
@@ -35,8 +67,9 @@ app.get("/getdata", async (req, res) => {
 
 app.post("/data", async (req, res) => {
   try {
-    const { type, about } = req.body;
+    const { username, type, about } = req.body;
     const newData = new Data({
+      username,
       type,
       about
     });
@@ -122,6 +155,7 @@ app.post("/login", async (req, res) => {
     if (!validPasswords) {
       return res.status(400).json({ message: "Incorrect password" });
     }
+    // jwt code
     const token = jwt.sign({ username: user.username }, JWT_SECRET);
     res.cookie("token", token, { httpOnly: true });
     res.cookie("authToken", "uniqueTokenValue", { httpOnly: true, maxAge: 86400000 });
@@ -147,7 +181,9 @@ function authenticateToken(req, res, next) {
     next();
   });
 }
+
 // this is logout route
+
 app.get("/logout", (req, res) => {
   res.clearCookie("username");
   return res.status(200).json({ message: "Logout successful" });

@@ -1,12 +1,14 @@
 import axios from 'axios';
+import logo from "../assets/logo.png"
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-const Logout = () => {
+const Logout = ({ onLogout }) => {
   const handleLogout = async () => {
     try {
       await axios.get("http://localhost:3001/logout");
-      window.location.href = "/login";
+      onLogout(); // Call the onLogout function passed from the parent component
+      window.location.href = "/login"; // Redirect to the login page after logout
     } catch (error) {
       console.error("Error logging out:", error);
     }
@@ -20,6 +22,7 @@ const Logout = () => {
 const Home = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   useEffect(() => {
     axios
@@ -34,40 +37,48 @@ const Home = () => {
 
   const handleDelete = (id) => {
     axios.delete(`http://localhost:3001/deleteitem/${id}`)
-    .then(res => {
-      setData(prevData => prevData.filter(item => item._id !== id));
-    })
-    .catch(err => {
-      setError(err.message);
-    });
-  }
+      .then(res => {
+        setData(prevData => prevData.filter(item => item._id !== id));
+      })
+      .catch(err => {
+        setError(err.message);
+      });
+  };
+
+  const handleLogout = () => {
+    setLoggedIn(false); // Update login status to false when logout is clicked
+  };
 
   return (
     <div className="container">
       <nav>
         <div className='lol'>
           <div className='navdiv'>
-            <div><h4>Logo here!</h4></div>
-              <div className='nav-options'>
-                <div>
-                  <Link to="/form" className='h4'>
-                    <h4 className='option'>Create a type</h4>
-                  </Link>
-                </div>
-                <div>
-                  <Link to="/register">
-                    <h4 className='option'>Register</h4>
-                  </Link>
-                </div>
-                <div>
-                  <Link to="login">
+            <div>
+              <img src={logo} alt="" className='logo' />
+            </div>
+            <div className='nav-options'>
+              <div>
+                <Link to="/form" className='h4'>
+                  <h4 className='option'>Create a type</h4>
+                </Link>
+              </div>
+              <div>
+                <Link to="/filter" className='h4'>
+                  <h4 className='option filteroption'>Filter</h4>
+                </Link>
+              </div>
+              <div>
+                {!loggedIn && (
+                  <Link to="/login">
                     <h4 className='option'>Login</h4>
                   </Link>
-                </div>
-                <div>
-                  <Logout />
-                </div>
+                )}
               </div>
+              <div>
+                {loggedIn && <Logout onLogout={handleLogout} />}
+              </div>
+            </div>
           </div>
         </div>
       </nav>
@@ -81,6 +92,7 @@ const Home = () => {
               <h3>Type of driver : {item.type}</h3>
               <h4>Type of conversation with them :</h4>
               <p>{item.about}</p>
+              <h5>Written by : <i>{item.username}</i></h5>
               <div className='btnsdiv'>
                 <Link to={`/update/${item._id}`}>
                   <button>Update</button>
@@ -91,7 +103,8 @@ const Home = () => {
           </div>
         ))
       ) : (
-        <p>No data available</p>
+        <p>Please wait we are trying to give the best experience
+        </p>
       )}
     </div>
   );

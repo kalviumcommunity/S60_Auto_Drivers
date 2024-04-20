@@ -2,6 +2,7 @@ import { useState } from "react"
 import axios from 'axios'
 import { Link, useNavigate } from "react-router-dom"
 const Form = () => {
+    const [username, setUsername] = useState("")
     const [type, setType] = useState("")
     const [about, setAbout] = useState("")
     const navigate = useNavigate()
@@ -10,6 +11,7 @@ const Form = () => {
         e.preventDefault()
         axios
         .post("http://localhost:3001/data", {
+            username,
             type,
             about
         }).then((res) => {
@@ -27,6 +29,10 @@ const Form = () => {
         <div className="formbox">
       <form action="" onSubmit={handleSubmit}>
         <center><h2>Fill your feel</h2></center>
+        <div className="typediv">
+            <label htmlFor="text">Username :</label><br />
+            <input type="text" required onChange={(e) => setUsername(e.target.value)} />
+        </div>
         <div className="typediv">
             <label htmlFor="text">Enter the type of Driver:</label><br />
             <input type="text" required onChange={(e) => setType(e.target.value)} className="text" />
