@@ -6,7 +6,7 @@ The idea is to create a platform for the funniest auto drivers and their convers
 The main intension of this project is to make smile on every face and make to feel happy for some part of the day hope you will enjoy the website
 
 # features:
-- User friendly inteface
+- User friendly interface
 - Discover by filters
 - User and Author authentication
 
